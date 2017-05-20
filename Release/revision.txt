@@ -1,0 +1,325 @@
+*****************************************************************************
+LAST REVISION: 02.04.06
+ REVISION DATE: 2015-7-3
+ AUTHOR NAME: laikey
+ DESCRIPTION:
+1.修改针对Vx805针打不才用安全模式写数据
+*****************************************************************************
+LAST REVISION: 02.04.05
+ REVISION DATE: 2015-7-2
+ AUTHOR NAME: laikey
+ DESCRIPTION:
+1.修改写数据到打印机的时候才用安全判断模式
+2.修改函数Print_Str判断到有回车的时候等待10ms
+*****************************************************************************
+LAST REVISION: 02.04.04
+ REVISION DATE: 2015-6-26
+ AUTHOR NAME: laikey
+ DESCRIPTION:
+1.写打印机数据后判断打印机状态和写数据是否全部写完
+2.修改下载打印机点阵数据的table表index
+*****************************************************************************
+LAST REVISION: 02.04.03
+ REVISION DATE: 2015-6-05
+ AUTHOR NAME: laikey
+ DESCRIPTION:
+1.修改针打打印字体模式，汉字采用横竖点阵隔点压缩方式打印，英文采用横向隔点压缩方式打印
+   若某些汉字压缩后打印模糊，可以在atool压缩文件里头的group15/notshz.txt里头把这个字加入
+   不压缩的汉字列表里头
+2.电子签名部分，修改默认端口为USB口，应用程序通过函数eSign_SetComPort可以修改这个端口
+*****************************************************************************
+LAST REVISION: 02.04.02
+ REVISION DATE: 2015-4-10
+ AUTHOR NAME: laikey
+ DESCRIPTION:
+1.修改应用和主控之间来回切换后打印会有部分字出现错字的情况
+*****************************************************************************
+LAST REVISION: 02.04.01
+ REVISION DATE: 2015-3-23
+ AUTHOR NAME: laikey
+ DESCRIPTION:
+ 1.修改多应用之间切换调用callfunc后打印会变慢的问题
+*****************************************************************************
+LAST REVISION: 02.04.00
+ REVISION DATE: 2015-1-09
+ AUTHOR NAME: laikey
+ DESCRIPTION:
+ 1.增加电子签名函数eSign_SetComPort，用于设定外置签名板指定使用哪个端口连接
+ 2.增加支持Vx820作为外置电子签名板
+
+*****************************************************************************
+LAST REVISION: 02.03.03
+ REVISION DATE: 2014-12-25
+ AUTHOR NAME: laikey
+ DESCRIPTION:
+ 1.改为正式释放版本
+
+*****************************************************************************
+LAST REVISION: 02.03.02.icbc.a
+ REVISION DATE: 2014-09-01
+ AUTHOR NAME: Yunlong Gao
+ DESCRIPTION: 
+ 1.增加 Print_SetSprocketDotMode ，支持针打打印小字体
+ 2.修改Print_Init,加入对 m_sprocket_dot_mode的判断
+ 3.修改Print_Str, 加入 对 m_sprocket_dot_mode的判断
+ 4.Print_FormFeed 加入判断如果不是针打机型，直接返回0
+
+***************************************************************************** 
+LAST REVISION: 02.03.01
+ REVISION DATE: 2014-09-01
+ AUTHOR NAME: Yunlong Gao
+ DESCRIPTION: 
+ 1)修改eSign_Signature接口,添加对外置签名板支持
+ 2)修改eSign_PrintImage接口为eSign_PrintPBMImage
+ 3)添加接口eSign_Check
+ 4)设置外置签名版输出图像分辨率为80*240
+*****************************************************************************
+LAST REVISION: 02.03.00
+ REVISION DATE: 2014-01-14
+ AUTHOR NAME: Yunlong Gao
+ DESCRIPTION: 
+ 1)添加esignature.c jbig,c 支持电子签名
+	新增接口
+	eSign_Signature,
+	eSign_PrintImage,
+	eSign_CompressImage,
+	eSign_UnCompressImage
+ 2)修改
+	MmiUtil_InputText,MmiUtil_InputLongText,MmiUtil_InputNum,MmiUtil_InputLongNum
+	MmiUtil_InputPWD,MmiUtil_InputAmount
+	头文件返回值说明
+*****************************************************************************
+LAST REVISION: 02.02.00
+ REVISION DATE: 2013-11-28
+ AUTHOR NAME: Laikey
+ DESCRIPTION: 
+ 1)更新版本号，正式版本释放
+*****************************************************************************
+LAST REVISION: 02.01.00.c
+ REVISION DATE: 2013-11-27
+ AUTHOR NAME: Laikey
+ DESCRIPTION: 
+ 1)优化打印机状态检测,在检查打印机状态返回“-20”时，OS会在1秒后或再次发送检查打印机状态指令后恢复，这样检查打印机状态里面需要有个循环，按照下面的说法，最糟糕的的情况下会等5秒，也就是循环的超时设置成5秒即可
+ 2)使用ACT 1.5.0
+*****************************************************************************
+LAST REVISION: 02.01.00.b
+ REVISION DATE: 2013-09-24
+ AUTHOR NAME: Xingyu Wu
+ DESCRIPTION: 
+ 1)优化Print_PreLoadFont()，只调用一次select font。
+ 2)优化ComDev_Write，不比较errno。
+*****************************************************************************
+LAST REVISION: 02.01.00.a
+ REVISION DATE: 2013-09-23
+ AUTHOR NAME: Xingyu Wu
+ DESCRIPTION: 
+ 1)使用ACT 1.5.0编译。
+ 2)针对VX820 DUET，增加Print_PreLoadFont()，开机下载16点阵字库；修改ComDev_Write
+*****************************************************************************
+LAST REVISION: 02.01.00
+ REVISION DATE: 2013-05-15
+ AUTHOR NAME: JianZhong Bai	
+ DESCRIPTION: 
+ 1)增加GBK字符集的处理，如果没有GBK字库，就使用原来的gb2312字库。
+   GBK字库有3个，分别为：#gbk12.fon(12点阵)，#gbk16.fon(16点阵)，#gbk24.fon(24点阵)。
+
+*****************************************************************************
+LAST REVISION: 02.00.05
+ REVISION DATE: 2013-03-26
+ AUTHOR NAME: Laikey  	
+ DESCRIPTION: 
+ 1)修改Vx675字体为28x28清屏的时候最下面有点阵未清除的情况
+
+*****************************************************************************
+LAST REVISION: 02.00.04
+ REVISION DATE: 2013-03-21
+ AUTHOR NAME: Laikey  	
+ DESCRIPTION: 
+ 1)修改连续打印乱码的问题
+ 2)修改Vx805打印机打印12x12汉字字体和走纸慢的问题
+
+*****************************************************************************
+LAST REVISION: 02_00_03_a
+ REVISION DATE: 2012-9-19
+ AUTHOR NAME: Qiaorong Lu  	
+ DESCRIPTION: 
+ 1)兼容VX600（汉字2行显示）
+ 2)增加接口MmiUtil_SetKeypadState()设置VX600键盘状态为休眠或唤醒
+ 3)增加barcode.c，支持条码设备
+ 4)增加bluetooth.c，支持蓝牙设备（DEV_COM3）。
+
+*****************************************************************************
+LAST REVISION: 02_00_03
+ REVISION DATE: 2012-8-3
+ AUTHOR NAME: Qiaorong Lu  	
+ DESCRIPTION: 更新版本号，正式版本。
+
+*****************************************************************************
+LAST REVISION: 02_00_01_f
+ REVISION DATE: 2012-07-24
+ AUTHOR NAME: Chao Liu (Simon)
+ DESCRIPTION:
+ 1)MmiUtil_InputText(),MmiUtil_InputNum()
+    回退为02_00_01_d的功能
+ 2)新增MmiUtil_InputLongText(),MmiUtil_InputLongNum()
+    2.1分别在MmiUtil_InputText(),MmiUtil_InputNum()基础上，进行修改
+    2.2修改接受的最大长度为256字符
+    2.3当字符数超过屏幕显示范围时，显示字符串的最后部分（字符串前面多出的部分不显示）
+    2.4当设备为Vx680时，如果传入的初始参数最后一个字符是数字，则可以通过连续按键进行切换
+ 另附，键值对应表：
+        "0- +%_", "1QZqz.\\", "2ABCabc&", "3DEFdef%",
+        "4GHIghi*", "5JKLjkl/", "6MNOmno~", "7PRSprs^",
+        "8TUVtuv[", "9WXYwxy]", "*,'\":", "#=:$?"
+ *****************************************************************************
+LAST REVISION: 02_00_01_e
+ REVISION DATE: 2012-07-13
+ AUTHOR NAME: Chao Liu (Simon)
+ DESCRIPTION:
+ 1)MmiUtil_InputText(),MmiUtil_InputNum()
+    1.1修改接受的最大长度为256字符
+    1.2当字符数超过屏幕显示范围时，显示字符串的最后部分（字符串前面多出的部分不显示）
+ *****************************************************************************
+LAST REVISION: 02_00_01_d
+ REVISION DATE: 2012-06-27
+ AUTHOR NAME: Qiaorong Lu	
+ DESCRIPTION:
+ 1)MmiUtil_InputText()函数增加下划线'_'的输入。
+ *****************************************************************************
+LAST REVISION: 02_00_01_c
+ REVISION DATE: 2012-05-30
+ AUTHOR NAME: Qiaorong Lu	
+ DESCRIPTION:
+ 1)解决连续打印时应用重启的BUG。（02_00_01_0a版本出现）
+ *****************************************************************************
+LAST REVISION: 02_00_01_b
+ REVISION DATE: 2012-05-15
+ AUTHOR NAME: Qiaorong Lu	
+ DESCRIPTION:
+ 1)兼容VX675屏幕(320*240)
+ *****************************************************************************
+ LAST REVISION: 02_00_01_0a
+ REVISION DATE: 2012-05-02
+ AUTHOR NAME: Qiaorong Lu	
+ DESCRIPTION: 
+ 1) 增加VX675的支持；
+ 2) 优化打印临时文件的读；
+ 3) 修改VX670显示行数的BUG；
+ *****************************************************************************
+ LAST REVISION: 02_00_01
+ REVISION DATE: 2011-11-16
+ AUTHOR NAME:   Zhao Yaping	
+ DESCRIPTION: 更新版本号，正式版本。
+ *****************************************************************************
+LAST REVISION: 02_00_00_0a
+ REVISION DATE: 2011-11-01
+ AUTHOR NAME:   Qiaorong Lu	
+ DESCRIPTION: 三合一版本（在CUP 1.3.1版本基础上整合CCB 1.2.3a, ICBC 1.1.3版本）
+ 1.增加Print_SetDark()函数，设置打印机打印黑度；
+ 2.3合1版本中以下显示函数都是先清行再显示
+   MmiUtil_DisplayLine()
+   MmiUtil_DisplayRight()
+   MmiUtil_DisplayCenter()
+ 3.增加MmiUtil_DisplayRightNoClear(),代替CCB版本MmiUtil_DisplayRight()，此函数不清行，靠右显示。
+ 4.增加MmiUtil_DisplayCenter_ICBC(), 代替ICBC版本MmiUtil_DisplayCenter(), 此函数会在显示第1行数据时显示背景图片；
+ 5.download\Trident\目录下,
+   develop目录为开发卡签名，product目录为生产卡签名
+ *****************************************************************************
+ LAST REVISION: 01_03_01
+ REVISION DATE: 2011-08-31
+ AUTHOR NAME:   Alan Tian	
+ DESCRIPTION:
+1.6x8.vft文件名去掉#；
+2.版本号更新为正式释放版本1.3.1,针对cup2测试。icbc版为1.1.x，ccb版为1.2.x，cup版为1.3.x。
+3.release目录中，删除color和mono子目录，仅保留Vx和Trident两个目录。
+4.将cn12x12.dat和en5x8.dat移至vChnFont_01.02.00包中。
+
+*****************************************************************************
+ LAST REVISION: 01_03_00_0d
+ REVISION DATE: 2011-08-29
+ AUTHOR NAME:   Alan Tian	
+ DESCRIPTION:
+1.宏定义CHNFONT文件名去掉#；增加宏定义TTFFONT；
+
+*****************************************************************************
+ LAST REVISION: 01_03_00_0c
+ REVISION DATE: 2011-08-18
+ AUTHOR NAME:   Alan Tian	
+ DESCRIPTION:
+1.增加MmiUtil_GetPrinterType，判断是否针打。
+2.Print_Str_12中，对进入和退出Graphic模式时发送的字符指令，检查其write是否成功，失败时循环发送至超时。
+3.Release目录中,F15区加入BMP图片,显示按钮背景
+
+*****************************************************************************
+ LAST REVISION: 01_03_00_0b
+ REVISION DATE: 2011-08-15
+ AUTHOR NAME:   Alan Tian	
+ DESCRIPTION:
+1.修改Print中汉字缓存的下载方式(p3700_sel_tbl_dnld_char),改为下载失败时循环下载,直到3秒超时后退出
+
+*****************************************************************************
+ LAST REVISION: 01_03_00_0a
+ REVISION DATE: 2011-07-14
+ AUTHOR NAME:   Alan Tian	
+ DESCRIPTION:
+1.由4月19日版本继承而来,和1.2.0有一定差异,有待测试.
+2.增加GetTerminalType()的返回类型
+3.加入Print_Str_12()打印小字体
+
+*****************************************************************************
+ LAST REVISION: 01_02_00
+ REVISION DATE: 2011-02-11
+ AUTHOR NAME:   Yu Haitao
+ DESCRIPTION:
+   增加触摸屏BUTTON按钮处理模块。
+			/*=====================================================================================*
+				 								BUTTON处理子模块说明								   
+			
+			  1.BUTTON只在VX680/820的320*240触摸屏上使用。
+			
+			  2.BUTTON长度跟随显示文本的长度自动调整。
+			  
+			  3.BUTTON选中后的返回值自行设置。
+				
+			  4.使用G15 FLASH中的BTN1_L.BMP,BTN1_R.BMP,BTN1_C.BMP作为显示BUTTON组件，
+					BTN2_L.BMP,BTN2_R.BMP,BTN2_C.BMP作为选中时显示的BUTTON组件。
+			
+			  5.可以通过更换上述文件来换成自己期望的效果，但要遵循如下要求：
+					a.BUTTON通过左、中、右3个图片文件组合而成
+					b.中间部分的长度为240像素，左和右部分的图片宽度为10个像素
+					c.BUTTON的高度可根据BMP的高度自定义，通过MmiUtil_SetTouchButton来设置(默认的BMP文件高度为32像素)
+					d.BMP文件为24位彩色，不可用32位彩色
+			*======================================================================================*/
+		增加3个BUTTON处理函数：
+				MmiUtil_SetTouchButton用于BUTTON模块初始化；
+				MmiUtil_ShowTouchButton用于显示BUTTON；
+				MmiUtil_CheckTouchButton用于检测是否有BUTTON被按下
+
+
+*****************************************************************************
+ LAST REVISION: 01_02_00
+ REVISION DATE: 2011-01-31
+ AUTHOR NAME:   Yu Haitao
+ DESCRIPTION:
+   1. 修改MmiUtil_SetFontSize，支持TTF字库自定义。
+   2. 增加MmiUtil_DispStrByColor，在指定位置显示字符，可自定义字体颜色和背景颜色。
+   		使用RGB颜色模式，后3个字节有效，第一个字节表示红色，第二个字节绿色，第三个字节是蓝色
+   		APPTOOLS内部转换为16位色
+   3. 增加MmiUtil_SetFontColor，用于设置显示字体的颜色
+   4. 字库文件使用#作为前缀，保证清空POS时，字库不会被删除
+   5. 修改File_PutKey和File_GetKey的处理方法，并修改写入时延时SVC_WAIT(10)修改为SVC_WAIT(0)
+   6. 增加File_ReadLine，提供外部应用使用
+   7. 增加BankUtil_CStrlcpy，提供外部应用使用
+
+*****************************************************************************
+ LAST REVISION: 01_00_01
+ REVISION DATE: 2010-11-30
+ AUTHOR NAME:   Lu Qiaorong
+ DESCRIPTION:
+   1. 修改MmiUtil_GetTerminalType，支持VX820。
+   2. 去掉串口日志输出。
+*****************************************************************************
+ LAST REVISION: 01_00_00
+ REVISION DATE: 2010-09-08
+ AUTHOR NAME:   Lu Qiaorong
+ DESCRIPTION:   APPTOOLS库初始版本
+*****************************************************************************
